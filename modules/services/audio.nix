@@ -1,6 +1,6 @@
 { self, inputs, ... }: {
   flake.nixosModules.audio = { pkgs, lib, ... }: {
-    # PipeWire Audio
+
     services.pipewire = {
       enable = true;
       alsa.enable = true;

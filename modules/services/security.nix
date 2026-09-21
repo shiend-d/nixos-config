@@ -1,10 +1,15 @@
 { self, inputs, ... }: {
   flake.nixosModules.security = { pkgs, lib, ... }: {
-    # GNOME Keyring
+
     services.gnome.gnome-keyring.enable = true;
     security.pam.services.login.enableGnomeKeyring = true;
 
-    # Polkit & Udisks2 Rules
+    programs.gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryPackage = pkgs.pinentry-qt;
+    };
+
     security.polkit = {
       enable = true;
       enablePkexecWrapper = true;
@@ -20,22 +25,9 @@
             return polkit.Result.YES;
           }
         });
-
-        // Noctalia Greeter: passwordless appearance sync (NixOS nixpkgs module rule)
-        polkit.addRule(function(action, subject) {
-          var allowedUsers = ["shiend"];
-          if (action.id == "org.noctalia.greeter.sync-appearance" &&
-              action.lookup("program") == "${pkgs.noctalia-greeter}/bin/noctalia-greeter-apply-appearance" &&
-              action.lookup("user") == "root" &&
-              subject.local && subject.active &&
-              allowedUsers.indexOf(subject.user) >= 0) {
-            return polkit.Result.YES;
-          }
-        });
       '';
     };
 
-    # Polkit KDE Agent Service (Fallback GUI Agent)
     systemd.user.services.polkit-kde-authentication-agent-1 = {
       description = "polkit-kde-authentication-agent-1";
       wantedBy = [ "graphical-session.target" ];

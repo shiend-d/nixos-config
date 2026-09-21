@@ -23,13 +23,15 @@ Personal NixOS configuration using [Nix Flakes](https://nixos.wiki/wiki/Flakes) 
 nixos-config/
 ├── flake.nix              # Flake inputs & outputs
 ├── flake.lock             # Pinned input versions
+├── .gitignore             # Ignored build/direnv artifacts
 ├── assets/
 │   └── sddm/              # SDDM login screen assets
 └── modules/
     ├── parts.nix          # flake-parts wiring
     ├── core/              # Base system (boot, locale, nix, users)
-    ├── desktop/           # DE & theming (niri, noctalia, theme)
     ├── hardware/          # Hardware, filesystems, swap
-    ├── host/              # Machine-specific config & hostname
-    └── system/            # Packages, audio, networking, security, storage
+    ├── desktop/           # DE & theming (niri, noctalia, theme)
+    ├── services/          # System services (audio, networking, security, storage, power, printing, flatpak, docker, database)
+    ├── packages/          # System packages
+    └── host/              # Machine-specific config & hostname
 ```

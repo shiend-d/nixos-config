@@ -1,17 +1,28 @@
 { self, inputs, ... }: {
   flake.nixosModules.users = { pkgs, lib, ... }: {
-    # Shell configuration
+
     programs.fish.enable = true;
     programs.starship = {
       enable = true;
       enableFishIntegration = true;
     };
 
-    # User account: shiend
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     users.users."shiend" = {
       isNormalUser = true;
       description = "Shiend";
-      extraGroups = [ "networkmanager" "wheel" "video" "audio" "i2c" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "video"
+        "audio"
+        "i2c"
+        "docker"
+      ];
       shell = pkgs.fish;
     };
   };

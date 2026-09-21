@@ -1,9 +1,8 @@
 { self, inputs, ... }: {
   flake.nixosModules.locale = { pkgs, lib, ... }: {
-    # Timezone
+
     time.timeZone = "Asia/Jakarta";
 
-    # Internationalisation
     i18n.defaultLocale = "en_US.UTF-8";
     i18n.extraLocaleSettings = {
       LC_ADDRESS = "id_ID.UTF-8";
@@ -17,7 +16,6 @@
       LC_TIME = "id_ID.UTF-8";
     };
 
-    # Keymap
     services.xserver.xkb = {
       layout = "us";
       variant = "";

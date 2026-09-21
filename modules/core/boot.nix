@@ -2,9 +2,9 @@
   flake.nixosModules.boot = { pkgs, lib, ... }: {
     boot.loader.grub = {
       enable = true;
-      device = "nodev";   # EFI (GPT)
+      device = "nodev";   
       efiSupport = true;
-      useOSProber = true; # Auto-detect Windows / Dual-boot
+      useOSProber = true; 
     };
     boot.loader.efi.canTouchEfiVariables = true;
   };
