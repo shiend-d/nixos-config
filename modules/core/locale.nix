@@ -13,7 +13,7 @@
       LC_NUMERIC = "id_ID.UTF-8";
       LC_PAPER = "id_ID.UTF-8";
       LC_TELEPHONE = "id_ID.UTF-8";
-      LC_TIME = "id_ID.UTF-8";
+      LC_TIME = "en_US.UTF-8";
     };
 
     services.xserver.xkb = {

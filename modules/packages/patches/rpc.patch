@@ -1,0 +1,20 @@
+diff --git a/src/ytm_player/services/discord_rpc.py b/src/ytm_player/services/discord_rpc.py
+--- a/src/ytm_player/services/discord_rpc.py
++++ b/src/ytm_player/services/discord_rpc.py
+@@ -118,11 +118,15 @@ class DiscordRPC:
+ 
+         try:
+             from pypresence import ActivityType  # type: ignore[attr-defined]
++            from pypresence import StatusDisplayType  # type: ignore[attr-defined]
+ 
+             activity_type = ActivityType.LISTENING
++            status_display_type = StatusDisplayType.DETAILS
+         except (ImportError, AttributeError):
+             activity_type = None
++            status_display_type = None
+ 
+         kwargs: dict = {
+             "activity_type": activity_type,
++            "status_display_type": status_display_type,
+             "details": (title or "Unknown Track")[:128],
+             "state": (artist or "Unknown Artist")[:128],

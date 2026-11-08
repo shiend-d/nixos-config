@@ -4,7 +4,7 @@
     services.postgresql = {
       enable = true;
       package = pkgs.postgresql;
-      enableTCPIP = false;             
+      enableTCPIP = false;
 
       ensureUsers = [
         {
@@ -17,10 +17,18 @@
       ];
     };
 
+    systemd.services.postgresql.wantedBy = lib.mkForce [];
+    systemd.targets.postgresql = {
+      requires = lib.mkForce [];
+      wantedBy = lib.mkForce [];
+    };
+
     services.redis.servers."" = {
       enable = true;
       port = 6379;
     };
+
+    systemd.services.redis.wantedBy = lib.mkForce [];
 
     services.mysql = {
       enable = true;
@@ -32,6 +40,8 @@
         }
       ];
     };
+
+    systemd.services.mysql.wantedBy = lib.mkForce [];
 
     # services.mongodb = {
     #   enable = true;

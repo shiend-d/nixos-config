@@ -9,6 +9,20 @@
     boot.kernelModules = [ "kvm-intel" "i2c-dev" ];
     boot.extraModulePackages = [ ];
 
+    boot.extraModprobeConfig = ''
+      options kvm_intel nested=1
+    '';
+
+    virtualisation.libvirtd = {
+      enable = true;
+      onBoot = "ignore";
+    };
+
+    virtualisation.lxc = {
+      enable = true;
+      lxcfs.enable = true;
+    };
+
     fileSystems."/" = {
       device = "/dev/disk/by-uuid/11212611-3fb3-4813-9254-f99475b8088e";
       fsType = "ext4";
@@ -20,8 +34,6 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-    swapDevices = [ { device = "/var/lib/swapfile"; size = 4096; } ];
-
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
     hardware.enableRedistributableFirmware = true;
@@ -31,7 +43,7 @@
 
     hardware.bluetooth = {
       enable = true;
-      powerOnBoot = true;
+      powerOnBoot = false;
     };
 
     hardware.graphics = {

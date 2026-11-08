@@ -1,15 +1,21 @@
 { self, inputs, ... }: {
   flake.nixosModules.flatpak = { pkgs, lib, ... }: {
+    imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
 
-    services.flatpak.enable = true;
+    services.flatpak = {
+      enable = true;
 
-    systemd.services.flatpak-repo = {
-      wantedBy = [ "multi-user.target" ];
-      path = [ pkgs.flatpak ];
-      script = ''
-        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-      '';
+      remotes = [
+        {
+          name = "flathub";
+          location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+        }
+      ];
+
+      update.auto = {
+        enable = true;
+        onCalendar = "weekly";
+      };
     };
-
   };
 }

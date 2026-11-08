@@ -4,6 +4,15 @@
     services.gnome.gnome-keyring.enable = true;
     security.pam.services.login.enableGnomeKeyring = true;
 
+    security.sudo.extraRules = [
+      {
+        groups = [ "wheel" ];
+        commands = [
+          { command = "${pkgs.tailscale}/bin/tailscale"; options = [ "NOPASSWD" ]; }
+        ];
+      }
+    ];
+
     programs.gnupg.agent = {
       enable = true;
       enableSSHSupport = true;

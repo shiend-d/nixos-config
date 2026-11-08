@@ -1,0 +1,32 @@
+// Input configuration: keyboard, touchpad, and mouse settings.
+input {
+    keyboard {
+        xkb {
+            // You can set xkb options here.
+            // options "grp:win_space_toggle"
+        }
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+        // scroll-method "two-finger"
+        scroll-factor 0.25
+        // accel-speed 0.2
+        // accel-profile "flat"
+    }
+
+    mouse {
+        // natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+    }
+
+    // Focus windows and outputs automatically when moving the mouse into them.
+    // focus-follows-mouse max-scroll-amount="0%"
+}
+
+cursor {
+    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-size 24
+}
