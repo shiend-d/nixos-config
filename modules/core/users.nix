@@ -22,6 +22,7 @@
         "audio"
         "i2c"
         "docker"
+        "libvirtd"
       ];
       shell = pkgs.fish;
     };

@@ -1,0 +1,34 @@
+// Window rules for application behaviors and decorations.
+
+// Global opacity rule & transparent window background support
+window-rule {
+    draw-border-with-background false
+    opacity 0.85
+}
+
+// Medium-strength blur for all windows
+window-rule {
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
+blur {
+    passes 2
+    offset 1.8
+    //noise 0.02
+    //saturation 1.5
+}
+
+// Global rounded corners for all windows
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+// Open Firefox picture-in-picture player as floating
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}

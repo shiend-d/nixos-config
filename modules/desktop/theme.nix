@@ -1,5 +1,17 @@
 { self, inputs, ... }: {
   flake.nixosModules.desktopTheme = { pkgs, lib, ... }: {
+
+    xdg.terminal-exec = {
+      enable = true;
+      settings.default = [ "kitty.desktop" ];
+    };
+
+    environment.etc."xdg/kdeglobals".text = ''
+      [General]
+      TerminalApplication=kitty
+      TerminalService=kitty.desktop
+    '';
+
     qt = {
       enable = true;
       platformTheme = "kde";
@@ -17,7 +29,23 @@
 
     xdg.mime.enable = true;
     xdg.mime.defaultApplications = {
-      "application/pdf" = [ "org.kde.okular.desktop" ];
+      "inode/directory" = [ "org.kde.dolphin.desktop" ];
+      "application/pdf" = [ "onlyoffice-desktopeditors.desktop" ];
+      "text/html" = [ "zen.desktop" ];
+      "x-scheme-handler/http" = [ "zen.desktop" ];
+      "x-scheme-handler/https" = [ "zen.desktop" ];
+      "x-scheme-handler/chrome" = [ "zen.desktop" ];
+      "application/msword" = [ "onlyoffice-desktopeditors.desktop" ];
+      "application/rtf" = [ "onlyoffice-desktopeditors.desktop" ];
+      "application/vnd.oasis.opendocument.text" = [ "onlyoffice-desktopeditors.desktop" ];
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "onlyoffice-desktopeditors.desktop" ];
+      "application/vnd.ms-excel" = [ "onlyoffice-desktopeditors.desktop" ];
+      "application/vnd.oasis.opendocument.spreadsheet" = [ "onlyoffice-desktopeditors.desktop" ];
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = [ "onlyoffice-desktopeditors.desktop" ];
+      "text/csv" = [ "onlyoffice-desktopeditors.desktop" ];
+      "application/vnd.ms-powerpoint" = [ "onlyoffice-desktopeditors.desktop" ];
+      "application/vnd.oasis.opendocument.presentation" = [ "onlyoffice-desktopeditors.desktop" ];
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = [ "onlyoffice-desktopeditors.desktop" ];
     };
 
     xdg.portal = {
@@ -43,12 +71,12 @@
       };
     };
 
-    # Fonts
     fonts = {
       packages = with pkgs; [
         
         nerd-fonts.jetbrains-mono    
         nerd-fonts.fira-code         
+        corefonts
         nerd-fonts.iosevka          
         nerd-fonts.noto             
         

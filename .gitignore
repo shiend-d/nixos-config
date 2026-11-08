@@ -2,3 +2,15 @@ result
 result-*
 .direnv/
 .envrc
+.agents/
+.aws/
+.codex/
+.commandcode/
+command-code-session-*.html
+*.log
+*.bak
+*.hm-backup
+*.store-link-backup
+*.swp
+*~
+*.html

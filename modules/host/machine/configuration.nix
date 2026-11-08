@@ -12,7 +12,6 @@
       self.nixosModules.storage
       self.nixosModules.audio
       self.nixosModules.power
-      self.nixosModules.printing
       self.nixosModules.flatpak
       self.nixosModules.packages
       self.nixosModules.docker  
@@ -22,6 +21,7 @@
       self.nixosModules.desktopNoctalia
       self.nixosModules.desktopTheme
       self.nixosModules.desktopRecorder
+      self.nixosModules.homeManager
     ];
   };
 }
